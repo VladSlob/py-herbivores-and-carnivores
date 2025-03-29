@@ -22,14 +22,15 @@ class Carnivore(Animal):
     def bite(self, other):
         if isinstance(other, Herbivore) and not other.hidden:
             other.health -= 50
-            Animal.remove_dead()
+            if other.health <= 0:
+                Animal.remove_dead()
 
-# Example usage
+# Приклад використання
 lion = Carnivore("Simba")
 rabbit = Herbivore("Susan")
-print(Animal.alive)  # Initial state
-lion.bite(rabbit)  # Lion bites Susan
-print(Animal.alive)  # Check state after bite
-rabbit.hide()  # Susan hides
-lion.bite(rabbit)  # Attempt to bite hidden Susan
-print(Animal.alive)  # Final state
+print(Animal.alive)  # Початковий стан
+lion.bite(rabbit)  # Лев кусає Сьюзен
+print(Animal.alive)  # Перевірка стану після укусу
+rabbit.hide()  # Сьюзен ховається
+lion.bite(rabbit)  # Спроба вкусити сховану Сьюзен
+print(Animal.alive)  # Кінцевий стан
